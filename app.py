@@ -18,6 +18,13 @@ st.markdown("""
   [data-testid="stAppViewContainer"] { background: #f8f9fb; }
   [data-testid="stSidebar"] { background: #0d1b2a; }
   [data-testid="stSidebar"] * { color: #e8eaf0 !important; }
+  /* Fix: input boxes and dropdowns need dark text on their light backgrounds */
+  [data-testid="stSidebar"] input { color: #0d1b2a !important; background: #f0f2f6 !important; border-radius: 6px; }
+  [data-testid="stSidebar"] [data-baseweb="select"] * { color: #0d1b2a !important; }
+  [data-testid="stSidebar"] [data-baseweb="select"] [data-testid="stMarkdownContainer"] * { color: #e8eaf0 !important; }
+  [data-testid="stSidebar"] [role="listbox"] * { color: #0d1b2a !important; }
+  [data-testid="stSidebar"] [data-baseweb="select"] div[class*="ValueContainer"] { background: #f0f2f6 !important; border-radius: 6px; }
+  [data-testid="stSidebar"] [data-baseweb="select"] span { color: #0d1b2a !important; }
   .hero { background: #0d1b2a; color: white; padding: 2.5rem 2rem 2rem;
           border-radius: 12px; margin-bottom: 1.5rem; }
   .hero-eye { color: #f0b429; font-size: 0.8rem; font-weight: 700;
