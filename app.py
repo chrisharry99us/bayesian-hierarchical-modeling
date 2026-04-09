@@ -143,6 +143,80 @@ for col, val, lbl in zip(
 
 st.markdown("<br>", unsafe_allow_html=True)
 
+# ── Context Section ────────────────────────────────────────────────────────────
+col_ctx, col_ctrl = st.columns([3, 2], gap="large")
+
+with col_ctx:
+    st.markdown("<div class='section-label'>About This Project</div>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class='card'>
+    <h3 style='margin-top:0'>What Is This?</h3>
+    <p>This app explores a national survey of <strong>1,603 U.S. adults</strong> on their opinions
+    about military aid to Ukraine, broken down by political affiliation —
+    Democrats, Independents, and Republicans. Each group was asked whether they want to
+    <em>Increase, Maintain, Decrease,</em> or are <em>Not Sure</em> about aid levels.</p>
+
+    <p>The goal is to answer a core statistical question: <strong>how do we best estimate each
+    group's true level of support when we have limited data?</strong> Three competing Bayesian
+    approaches are compared:</p>
+
+    <ul>
+      <li><strong>Separate Model</strong> — treats each party independently, ignoring what the
+      other parties tell us. Simple, but wastes information.</li>
+      <li><strong>Pooled Model</strong> — ignores party differences entirely and lumps everyone
+      together. Easy, but hides real group-level patterns.</li>
+      <li><strong>Hierarchical Model</strong> — the best of both worlds. Each party gets its own
+      estimate, but the groups also <em>share information</em> with each other through a common
+      population distribution. This is modeled using a custom
+      <strong>Gibbs sampler</strong> — an MCMC algorithm that repeatedly samples from the
+      posterior distributions of all unknowns until they converge to stable estimates.</li>
+    </ul>
+
+    <p style='margin-bottom:0'>The result is a principled, uncertainty-aware answer to how much
+    each political group supports a given policy stance — complete with credible intervals
+    and convergence diagnostics.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col_ctrl:
+    st.markdown("<div class='section-label'>How the Controls Work</div>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class='card'>
+    <h3 style='margin-top:0'>Sidebar Controls</h3>
+
+    <p><strong>🔁 Iterations</strong><br>
+    How many times the Gibbs sampler runs. More iterations = smoother, more stable
+    posterior distributions. Watch the <em>Hierarchical + Gibbs</em> tab histograms
+    and trace plots change as you increase this.</p>
+
+    <p><strong>📐 Known Variance (σ²)</strong><br>
+    How much natural noise we assume is in the survey proportions. A smaller value
+    means we trust the observed data more; a larger value means we lean more heavily
+    on the prior. Affects all three model tabs.</p>
+
+    <p><strong>🎲 Random Seed</strong><br>
+    Controls the randomness in the Gibbs sampler. Change this to see a different
+    random draw from the same posterior — results should be similar if the sampler
+    has converged properly.</p>
+
+    <p><strong>📍 Prior Mean (μ₀)</strong><br>
+    Our starting belief about the average support level before seeing the data.
+    0.5 = no prior opinion (neutral). Push it toward 0 or 1 and watch the
+    posteriors shift, especially with low iterations.</p>
+
+    <p><strong>📏 Prior Variance (τ²)</strong><br>
+    How confident we are in that prior belief. High variance = weak, vague prior
+    (data dominates). Low variance = strong prior (pulls estimates toward μ₀).</p>
+
+    <p style='margin-bottom:0'><strong>🎯 Focus Stance</strong><br>
+    Selects which opinion stance the Hierarchical model analyses. Switch between
+    <em>Increase Aid, Maintain Aid, Not Sure,</em> and <em>Decrease Aid</em> to
+    see how party positions shift across each stance.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
 # ══════════════════════════════════════════════════════════════════════════════
 # TABS
 # ══════════════════════════════════════════════════════════════════════════════
